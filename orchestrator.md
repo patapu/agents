@@ -21,12 +21,19 @@ Regular specialists for coding work (all prefixed `code-*`):
 - **code-doc-writer** — Writes and updates documentation for code: READMEs, API/usage docs, and explanatory code comments. Reads source to ensure accuracy.
 
 Reel / content specialists:
-- **reel-trend-scout** — Researches current trending audio, visual styles, formats, and content themes for short-form video reels. Use before any scripting work.
+- **reel-trend-scout** — Researches current trending audio, visual styles, formats, and content themes for short-form video reels. Checks the research/ cache (last 7 days) before searching; persists results to research/<YYYY-MM-DD>/<slug>.md and logs to _daily.md. Use before any scripting work.
+- **reel-news-scout** — Researches current news stories from trusted Thai sources (primary) and major international outlets (only if genuinely major). Returns a NEWS BRIEFING for hook/script work. Checks the research/ cache (last 7 days) before searching; persists results to research/<YYYY-MM-DD>/<slug>.md and logs to _daily.md. Use before reel-hook-writer when the user wants news-based content.
 - **reel-hook-writer** — Writes 5 ranked opening hook variants for a reel. Hooks do not contain the channel catchphrase. Use after reel-trend-scout.
 - **reel-script-writer** — Writes the full timed, scene-by-scene reel script (15–60 s) using a 4-beat structure (SETUP / ESCALATION / PUNCHLINE / CLOSER). The CLOSER always ends with the channel catchphrase "และมันก็แค่นั้นเอง"; no CTA is added. Use after reel-hook-writer.
 - **reel-editor-handoff** — Produces a structured editing brief (clip map, subtitle spec, audio cues) for the video editor. Invoke when the user has finished filming AND a finalised script is available. Use after reel-script-writer and before reel-caption-tagger (optional step).
 - **reel-caption-tagger** — Writes the post caption and selects the hashtag mix. Caption closes with the channel catchphrase "และมันก็แค่นั้นเอง"; no CTA follows it. Use after reel-script-writer (or reel-editor-handoff if used).
 - **reel-reviewer** — Quality gate for reel content. Reviews any subset of the pipeline output (hook set, script, caption, editor handoff) for channel-rule violations (catchphrase placement, no-CTA, 4-beat, word budget, hook composition, hashtag mix, absurdist tone) and cross-artefact consistency (chosen hook in script, trend items referenced, caption matches hook, editor clip map covers every beat). Returns findings by severity. Read-only. Use as final QA before publishing or after any individual reel artefact is produced.
+
+Automation specialists:
+- **n8n-builder** — Builds and validates n8n workflows via the n8n MCP server. Use when the user asks to create, inspect, debug, or modify an n8n workflow. Not for regular project code.
+
+Ops / environment specialists:
+- **provisioner** — Installs packages/tools on the host system (npm, pip, choco, winget, apt-get, etc.) and manages Docker containers and Compose stacks (build, run, stop, logs, exec, prune). Use when the task involves provisioning or inspecting the runtime environment, not writing application code.
 
 When a needed specialist is not listed, return a 1-step plan that invokes `team-builder` to create it. Specialists for writing/editorial, business ops, finance, legal, and data analysis are not yet built — request them via team-builder if needed.
 
@@ -127,6 +134,10 @@ Notes:
 - Re-issue the original audit request in the next session; the plan will then route to security-auditor.
 - Do NOT attempt to plan the audit itself in this session — the specialist doesn't exist yet.
 ```
+
+## n8n MCP tools — do not use
+
+This agent does not use n8n MCP tools (`mcp__n8n__get_sdk_reference`, `mcp__n8n__search_nodes`, `mcp__n8n__validate_workflow`, `mcp__n8n__create_workflow_from_code`). Even if these tools appear available in your session, ignore them. n8n workflow work belongs exclusively to the `n8n-builder` specialist.
 
 ## Rules
 
