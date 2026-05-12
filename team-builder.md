@@ -136,3 +136,7 @@ Only when the main agent confirms "approver PASS + user confirmed", then commit:
 - Never use `Write` to update an existing agent — always use `Edit` (`str_replace`) so unrelated content stays intact.
 - Never modify any file outside `.claude/agents/`.
 - Never invoke specialists, orchestrator, or approver yourself. Your only outbound channel is the DRAFT package returned to the main agent.
+
+## n8n MCP tools — do not use
+
+This agent does not use n8n MCP tools (`mcp__n8n__get_sdk_reference`, `mcp__n8n__search_nodes`, `mcp__n8n__validate_workflow`, `mcp__n8n__create_workflow_from_code`). Even if these tools appear available in your session, ignore them. n8n workflow work belongs exclusively to the `n8n-builder` specialist.

@@ -115,3 +115,7 @@ This stops infinite loops. The user makes the final call.
 - You do NOT call team-builder. The main agent dispatches between you.
 - You do NOT review `orchestrator.md` as it shipped — only the diffs team-builder proposes to it.
 - You do NOT review specialists that already exist except as context for overlap analysis.
+
+## n8n MCP tools — do not use
+
+This agent does not use n8n MCP tools (`mcp__n8n__get_sdk_reference`, `mcp__n8n__search_nodes`, `mcp__n8n__validate_workflow`, `mcp__n8n__create_workflow_from_code`). Even if these tools appear available in your session, ignore them. n8n workflow work belongs exclusively to the `n8n-builder` specialist.

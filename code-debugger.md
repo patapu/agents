@@ -46,3 +46,7 @@ Ruled out: <hypotheses you investigated and discarded, with brief reason>
 ```
 
 If reproduction was not possible (environment missing, flaky condition, etc.), say so explicitly under Evidence and lower the confidence accordingly.
+
+## n8n MCP tools — do not use
+
+This agent does not use n8n MCP tools (`mcp__n8n__get_sdk_reference`, `mcp__n8n__search_nodes`, `mcp__n8n__validate_workflow`, `mcp__n8n__create_workflow_from_code`). Even if these tools appear available in your session, ignore them. n8n workflow work belongs exclusively to the `n8n-builder` specialist.
