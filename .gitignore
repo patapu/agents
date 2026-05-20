@@ -1,1 +1,53 @@
-.claude/settings.local.json
+# ============================================================================
+# .claude repository — STRICT WHITELIST .gitignore
+# ----------------------------------------------------------------------------
+# This repo is rooted at ~/.claude, a directory full of runtime data, caches,
+# and SECRETS. To avoid ever leaking credentials or private conversation logs
+# to the GitHub remote (origin = github.com/patapu/agents), we IGNORE
+# EVERYTHING at the repo root by default and re-include ONLY the few
+# directories that are meant to be version-controlled.
+#
+# To track a new top-level item, add an explicit "!/<name>" line below.
+# ============================================================================
+
+# 1) Ignore everything at the repo root by default.
+/*
+
+# 2) Re-include ONLY the intended tracked content.
+!/.gitignore
+!/agents/
+!/skills/
+!/docs/
+
+# 3) Belt-and-suspenders: hard deny for known secrets / private runtime data.
+#    These come after the whitelist so they always win, in case a future
+#    "!/..." rule is ever added that would otherwise expose them.
+/.credentials.json
+/history.jsonl
+/mcp-needs-auth-cache.json
+/scheduled_tasks.lock
+/.last-cleanup
+/settings.json
+/settings.local.json
+/yolo-log.ps1
+/.context/
+/.claude/
+/projects/
+/sessions/
+/session-env/
+/shell-snapshots/
+/telemetry/
+/paste-cache/
+/file-history/
+/cache/
+/downloads/
+/backups/
+/drafts/
+/ide/
+/plugins/
+/research/
+/tasks/
+
+# Note: CLAUDE.md and META_PIPELINE.md are intentionally NOT tracked by
+# default (CLAUDE.md holds private global instructions). Add "!/CLAUDE.md"
+# or "!/META_PIPELINE.md" above if you decide to version them.
